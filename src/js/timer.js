@@ -1,27 +1,63 @@
 import refs from './refs';
+// import timerTamplate from './timerTamplate';
 
-const { body } = refs
+const { body, daysC, hoursC, minsC, secsC } = refs
+
+// body.insertAdjacentHTML('afterbegin', timerTamplate)
 
 
-const zzz = `<div class="timer" id="timer-1">
-  <div class="field">
-  <span class="value" data-value="days">11</span>
-    <span class="label">Days</span>
-    </div>
+const options = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+}
+const currentDate = new Date().toLocaleString('Uk-uk', options);
 
-  <div class="field">
-    <span class="value" data-value="hours">11</span>
-    <span class="label">Hours</span>
-  </div>
+class CountdownTimer {
+  constructor(markup) {
+    this.markup = markup;
+    this.targetDate = new Date('Jul 17, 2019');
+    this.intID = null;
+    this.deltaTime = 0;
+  }
+  start() {
+    this.intID = setInterval(() => {
+      let currentTime = Date.now();
+      this.deltaTime = this.targetDate - currentTime;
+      const days = Math.floor(this.deltaTime / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((this.deltaTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((this.deltaTime % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((this.deltaTime % (1000 * 60)) / 1000);
+      this.insertValues(days, hours, mins, secs)
+    }, 1000)
+  }
+  stop() {
+    clearInterval(this.intID)
+  }
 
-  <div class="field">
-    <span class="value" data-value="mins">11</span>
-    <span class="label">Minutes</span>
-  </div>
-  
-  <div class="field">
-  <span class="value" data-value="secs">11</span>
-  <span class="label">Seconds</span>
-  </div>
-  </div>`
-  body.insertAdjacentHTML('afterbegin', zzz)
+  insertValues(d, h, m, s) {
+    const { daysC, hoursC, minsC, secsC } = this.markup;
+    daysC.textContent = d;
+    hoursC.textContent = h;
+    minsC.textContent = m;
+    secsC.textContent = s;
+  }
+
+  //==============
+  // pad(value) {
+  //   return String(value).padStart(2, '0')
+  // }
+}
+
+const myTimer = new CountdownTimer(
+  {
+    daysC,
+    hoursC,
+    minsC,
+    secsC
+  }
+);
+myTimer.start()
