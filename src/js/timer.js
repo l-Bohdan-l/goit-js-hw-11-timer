@@ -17,9 +17,9 @@ const options = {
 const currentDate = new Date().toLocaleString('Uk-uk', options);
 
 class CountdownTimer {
-  constructor(markup) {
+  constructor(targetDate, markup) {
     this.markup = markup;
-    this.targetDate = new Date('Jul 17, 2019');
+    this.targetDate = targetDate;
     this.intID = null;
     this.deltaTime = 0;
   }
@@ -53,6 +53,7 @@ class CountdownTimer {
 }
 
 const myTimer = new CountdownTimer(
+  new Date ('Jan 1, 2022'),
   {
     daysC,
     hoursC,
