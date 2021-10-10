@@ -1,12 +1,12 @@
 {
-  "name": "goit-js-hw-11-time",
+  "name": "goit-js-hw-11-timer",
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://goitacademy.github.io/goit-js-hw-11-time",
+  "homepage": "https://l-bohdan-l.github.io/goit-js-hw-11-timer",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /goit-js-hw-11-time/"
+    "build": "parcel build src/*.html --public-url /goit-js-hw-11-timer/"
   },
   "repository": {
     "type": "git",
